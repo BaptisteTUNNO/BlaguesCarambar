@@ -1,0 +1,53 @@
+// Importer les modules nécessaires
+const express = require('express');
+
+// Créer une instance de l'application Express
+const app = express();
+
+// Endpoint pour récupérer une blague aléatoire
+app.get('/blagues/aleatoire', (req, res) => {
+  const jokes = [
+    "Quelle est la femelle du hamster ? L'amsterdam !",
+    "Que dit un oignon quand il se cogne ? Aie !",
+    "Quel est l'animal le plus heureux ? Le hibou, parce que sa femme est chouette !",
+    "Pourquoi le football c'est rigolo ? Parce que Thierry en rit !",
+    "Quel est le sport le plus fruité ? La boxe, parce que tu prend des pêches dans la poire et tu tombes dans les pommes !",
+    "Que se fait un schtroumpf quand il tombe ? Un Bleu !",
+    "Quel est le comble pour un marin ? Avoir le nez qui coule !",
+    "Qu'est-ce que les enfants usent le plus à l'école ? Le professeur !",
+    "Quel est le sport le plus silencieux ? Le para-chuuuuuuut !",
+    "Quel est le comble pour un joueur de bowling ? De perdre la boule !"
+  ];
+  
+  const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+  res.json({ joke: randomJoke });
+});
+
+// Endpoint pour récupérer une blague par ID
+app.get('/blagues/:id', (req, res) => {
+  const jokes = [
+    "Quelle est la femelle du hamster ? L'amsterdam !",
+    "Que dit un oignon quand il se cogne ? Aie !",
+    "Quel est l'animal le plus heureux ? Le hibou, parce que sa femme est chouette !",
+    "Pourquoi le football c'est rigolo ? Parce que Thierry en rit !",
+    "Quel est le sport le plus fruité ? La boxe, parce que tu prend des pêches dans la poire et tu tombes dans les pommes !",
+    "Que se fait un schtroumpf quand il tombe ? Un Bleu !",
+    "Quel est le comble pour un marin ? Avoir le nez qui coule !",
+    "Qu'est-ce que les enfants usent le plus à l'école ? Le professeur !",
+    "Quel est le sport le plus silencieux ? Le para-chuuuuuuut !",
+    "Quel est le comble pour un joueur de bowling ? De perdre la boule !"
+  ];
+  
+  const jokeId = parseInt(req.params.id);
+  
+  if (jokeId >= 0 && jokeId < jokes.length) {
+    res.json({ joke: jokes[jokeId] });
+  } else {
+    res.status(404).json({ message: "Blague introuvable" });
+  }
+});
+
+// Démarrer le serveur
+app.listen(3000, () => {
+  console.log('API en cours d\'exécution sur le port 3000');
+});
